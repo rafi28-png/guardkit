@@ -1,0 +1,43 @@
+name: Extract GuardKit v0.6.5
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Unzip GuardKit v0.6.5 and commit extracted files
+        run: |
+          set -euo pipefail
+          test -f guardkit.zip || { echo "guardkit.zip not found in repo root"; exit 1; }
+          rm -rf /tmp/gk && mkdir -p /tmp/gk
+          unzip -o guardkit.zip -d /tmp/gk
+          # If the zip wraps everything in a single top-level folder, step inside it
+          if [ "$(ls -A /tmp/gk | wc -l)" -eq 1 ] && [ -d "/tmp/gk/$(ls -A /tmp/gk)" ]; then
+            SRC="/tmp/gk/$(ls -A /tmp/gk)"
+          else
+            SRC=/tmp/gk
+          fi
+          echo "Copying suite files from: $SRC"
+          cp -a "$SRC"/. .
+          # Remove the zip and this helper workflow so the final tree holds only the suite
+          rm -f guardkit.zip
+          rm -f .github/workflows/extract-guardkit.yml
+          FILE_COUNT=$(find . -path ./.git -prune -o -type f -print | wc -l)
+          echo "Final file count (excluding .git): $FILE_COUNT"
+          echo "Top-level entries:"
+          ls -A
+          git config user.name "rafi28-png"
+          git config user.email "rafi28-png@users.noreply.github.com"
+          git add -A
+          echo "Staged changes (first 60 lines):"
+          git status --short | head -60
+          git commit -m 'GuardKit v0.6.5: 7-tool suite — verify before you trust, faster, greener, reproducible pipelines'
+          git push
