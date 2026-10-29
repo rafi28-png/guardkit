@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wattshift"
+version = "0.1.0"
+description = "Carbon- and grid-aware scheduler for CI/CD and batch compute"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+wattshift = "wattshift.cli:main"

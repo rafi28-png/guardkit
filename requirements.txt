@@ -1,0 +1,7 @@
+# GuardKit requirements
+# Five of six tools need ONLY Python 3.9+ standard library - no install needed.
+# ShmPipe is the exception, and it is optional:
+#   pip install pyarrow
+# To run ShmPipe only, install pyarrow. To run everything else, install nothing.
+# For tests (optional):
+#   pip install pytest

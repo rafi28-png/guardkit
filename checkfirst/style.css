@@ -1,0 +1,16 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f6f6; color: #222; }
+main { max-width: 720px; margin: 0 auto; padding: 20px; background: white; min-height: 100vh; }
+h1 { margin-bottom: 4px; }
+.tagline { color: #555; }
+textarea { width: 100%; box-sizing: border-box; font-size: 16px; padding: 12px; border: 2px solid #ccc; border-radius: 8px; }
+button { font-size: 16px; padding: 10px 14px; margin: 6px 6px 6px 0; border-radius: 8px; border: 1px solid #ccc; background: #eee; cursor: pointer; }
+button.primary { background: #111; color: white; }
+button.active { background: #111; color: white; }
+.hidden { display: none; }
+#verdict-card { padding: 16px; border-radius: 12px; margin: 16px 0; }
+#verdict-card.red { background: #ffe5e5; border: 2px solid #d00; }
+#verdict-card.amber { background: #fff4cc; border: 2px solid #d90; }
+#verdict-card.green { background: #e5f7e5; border: 2px solid #2a7; }
+.hint { color: #d00; font-size: 14px; }
+.privacy { font-size: 14px; color: #555; }
+@media print { .actions, .lang { display: none; } }

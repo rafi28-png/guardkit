@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320">
+  <rect width="900" height="320" fill="#ffffff"/>
+  <text x="450" y="30" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold">GuardKit — one dispatcher, seven standalone tools</text>
+  <rect x="350" y="50" width="200" height="50" rx="8" fill="#111" />
+  <text x="450" y="80" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#fff">kit.py  +  demo_all.py</text>
+  <rect x="40" y="140" width="260" height="120" rx="8" fill="#e8f5e9" stroke="#2a7" />
+  <text x="170" y="165" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">TRUST — verify first</text>
+  <text x="170" y="190" text-anchor="middle" font-family="sans-serif" font-size="14">SemVer-Diff • CheckFirst</text>
+  <text x="170" y="212" text-anchor="middle" font-family="sans-serif" font-size="14">SafeOffer • SecretScan</text>
+  <text x="170" y="234" text-anchor="middle" font-family="sans-serif" font-size="14">Web app: English + Bengali</text>
+  <rect x="320" y="140" width="260" height="120" rx="8" fill="#e3f2fd" stroke="#1565c0" />
+  <text x="450" y="165" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">EFFICIENCY — pipelines</text>
+  <text x="450" y="190" text-anchor="middle" font-family="sans-serif" font-size="14">TraceLock • WattShift • ShmPipe</text>
+  <text x="450" y="212" text-anchor="middle" font-family="sans-serif" font-size="14">Provenance • Carbon • Speed</text>
+  <text x="450" y="234" text-anchor="middle" font-family="sans-serif" font-size="14">6.6x faster at 5M rows (ShmPipe)</text>
+  <rect x="600" y="140" width="260" height="120" rx="8" fill="#fff3e0" stroke="#e65100" />
+  <text x="730" y="165" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">PROOF</text>
+  <text x="730" y="190" text-anchor="middle" font-family="sans-serif" font-size="14">SUITE_REPORT.md + .html</text>
+  <text x="730" y="212" text-anchor="middle" font-family="sans-serif" font-size="14">Tests in every tool folder</text>
+  <text x="730" y="234" text-anchor="middle" font-family="sans-serif" font-size="14">CI on every push / PR</text>
+  <line x1="450" y1="100" x2="170" y2="140" stroke="#999" />
+  <line x1="450" y1="100" x2="450" y2="140" stroke="#999" />
+  <line x1="450" y1="100" x2="730" y2="140" stroke="#999" />
+  <text x="450" y="300" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#666">Each tool still works alone. The suite does not merge their code — it routes to them.</text>
+</svg>

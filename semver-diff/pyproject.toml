@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semver-diff"
+version = "0.1.0"
+description = "Behavioral breaking-change detector for Python libraries"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "GuardKit contributors"}]
+keywords = ["semver", "breaking-change", "testing", "ci"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.scripts]
+semver-diff = "semver_diff.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["semver_diff*"]

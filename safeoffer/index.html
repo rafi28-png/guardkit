@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeOffer — Don't Pay Yet Checker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>🛡️ SafeOffer</h1>
+  <p class="tagline" data-en="Paste a job, loan, or deal offer BEFORE you pay. Get a plain-language safety check in seconds."
+     data-bn="টাকা দেওয়ার আগে চাকরি, ঋণ বা যেকোনো অফার এখানে পেস্ট করুন। কয়েক সেকেন্ডে সহজ ভাষায় নিরাপত্তা যাচাই পাবেন।">
+     Paste a job, loan, or deal offer BEFORE you pay. Get a plain-language safety check in seconds.</p>
+
+  <div class="lang">
+    <button id="btn-en" class="active">English</button>
+    <button id="btn-bn">বাংলা</button>
+  </div>
+
+  <label for="offer">Paste the offer here <span class="hint">(do NOT paste your passport, bank details, or personal ID)</span></label>
+  <textarea id="offer" rows="8" placeholder="Example: Urgent job in Cambodia, salary $1500, no experience, pay 6 lakh taka cash now..."></textarea>
+
+  <div class="actions">
+    <button id="check" class="primary">Check this offer</button>
+    <button id="load-fake">Load fake job example</button>
+    <button id="load-legit">Load legit example</button>
+    <button id="clear">Clear</button>
+  </div>
+
+  <div id="result" class="hidden">
+    <div id="verdict-card">
+      <div id="score"></div>
+      <h2 id="verdict"></h2>
+      <p id="advice"></p>
+    </div>
+    <h3>Flags found</h3>
+    <ul id="flags"></ul>
+    <h3>Ask these 5 questions before paying</h3>
+    <ol id="questions"></ol>
+    <button id="print" onclick="window.print()">Print this checklist</button>
+  </div>
+
+  <p class="privacy">🔒 Privacy: Checking happens in your browser. Nothing is uploaded, nothing is stored.
+    This is not legal advice. Always verify with BMET, the embassy, and the employer directly.</p>
+  <p class="privacy">CheckFirst is a separate, held idea. SafeOffer is about money/travel decisions, not general news truth.</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

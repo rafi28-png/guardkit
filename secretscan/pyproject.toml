@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secretscan"
+version = "0.1.0"
+description = "Scan for hardcoded secrets before pushing to GitHub"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "GuardKit contributors"}]
+keywords = ["secrets", "security", "pre-commit", "github"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Security",
+]
+[project.scripts]
+secretscan = "secretscan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["secretscan*"]

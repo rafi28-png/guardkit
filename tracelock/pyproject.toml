@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tracelock"
+version = "0.1.0"
+description = "Zero-code OS-level provenance for scientific and ML pipelines"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+tracelock = "tracelock.cli:main"

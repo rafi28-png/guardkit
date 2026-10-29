@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuardKit — Verify Before You Trust</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>🛡️ GuardKit</h1>
+    <p><strong>Verify before you trust. Make pipelines faster, greener, reproducible.</strong></p>
+    <p>Seven working tools in one worldwide suite. English primary, with Bengali support for the trust checkers. Each tool works alone. One command proves them all.</p>
+    <span class="badge">🌍 Worldwide • 7 tools • Demo: ALL PASS • No upload • No install for the web app</span>
+  </header>
+  <p style="text-align:center; margin:20px 0;">
+    <a href="index.html"><button class="primary">▶ Try the web app — Check a Message / Check an Offer</button></a>
+  </p>
+  <div>
+    <button class="active" id="filter-all" onclick="filterTools('all')">All 7</button>
+    <button id="filter-trust" onclick="filterTools('trust')">🛡️ Trust</button>
+    <button id="filter-eff" onclick="filterTools('eff')">⚡ Efficiency</button>
+    <input id="tool-search" placeholder="Search tools… e.g. scam, carbon, secrets" style="padding:12px; border-radius:999px; border:2px solid #d6d6e6; width:100%; max-width:320px; font-size:16px;" oninput="filterTools(currentFilter)">
+  </div>
+  <div class="tool-grid" id="tool-grid">
+    <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><h3>🔍 SemVer-Diff</h3><p>Catches silent breaking changes in a "safe" patch. Demo: 4 divergences found.</p><p><strong>Click to try:</strong> <code>python kit.py semver-diff compare …</code></p></div>
+    <div class="tool-card" data-group="trust" data-text="checkfirst message scam forward whatsapp"><h3>✅ CheckFirst</h3><p>Paste a forwarded message, get a scam / misinformation check. Demo: scam 100/100 RED.</p><p><strong>Click to try:</strong> <a href="index.html">Open web app →</a></p></div>
+    <div class="tool-card" data-group="trust" data-text="safeoffer job loan offer pay money"><h3>💰 SafeOffer</h3><p>Paste a job / loan offer before you pay. Demo: fake job 100/100 RED.</p><p><strong>Click to try:</strong> <a href="index.html">Open web app →</a></p></div>
+    <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><h3>🔐 SecretScan</h3><p>Scan for hardcoded secrets before you push. Demo: leaky 3 findings, clean 0.</p><p><strong>Click to try:</strong> <code>python kit.py secretscan scan …</code></p></div>
+    <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><h3>🧬 TraceLock</h3><p>Provenance for pipelines, with corruption alerts. Demo: 50% empty cells flagged.</p></div>
+    <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><h3>🌱 WattShift</h3><p>Cleanest time to run a batch job. Demo: saved 350g CO2 (60.3%).</p></div>
+    <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><h3>⚡ ShmPipe</h3><p>Shared-memory data pipes. Demo: 6.6x faster than CSV at 5M rows.</p></div>
+  </div>
+  <details open>
+    <summary><strong>Proof, not promises — interactive demo results</strong></summary>
+    <p>Run <code>python kit.py demo</code> yourself, or open <code>SUITE_REPORT.html</code> in the repo. Every result below was actually run:</p>
+    <ul>
+      <li>SemVer-Diff: <strong>PASS</strong> — 4 divergences</li>
+      <li>TraceLock: <strong>PASS</strong> — no alerts on good pipeline</li>
+      <li>WattShift: <strong>PASS</strong> — 350g saved</li>
+      <li>ShmPipe: <strong>PASS</strong> — round-trip OK</li>
+      <li>SafeOffer: <strong>PASS</strong> — 100/100 RED</li>
+      <li>CheckFirst: <strong>PASS</strong> — 100/100 RED</li>
+      <li>SecretScan: <strong>PASS</strong> — leaky flagged, clean passed</li>
+    </ul>
+  </details>
+  <p><img src="../docs/architecture.svg" alt="GuardKit architecture: one dispatcher, seven standalone tools" style="width:100%;max-width:720px; background:white; border-radius:16px; padding:12px;"></p>
+  <p class="privacy">Privacy: the web app checks in your browser only. Nothing is uploaded. Never paste OTP, passwords, passport, or bank details. GuardKit is not legal or medical advice.</p>
+  <p><a href="index.html">Go to the web app →</a> &nbsp;|&nbsp; <a href="../README.md">Read the README</a></p>
+</main>
+<script>
+let currentFilter = 'all';
+function filterTools(group) {
+  if (group) currentFilter = group;
+  document.getElementById('filter-all').className = currentFilter === 'all' ? 'active' : '';
+  document.getElementById('filter-trust').className = currentFilter === 'trust' ? 'active' : '';
+  document.getElementById('filter-eff').className = currentFilter === 'eff' ? 'active' : '';
+  const q = (document.getElementById('tool-search').value || '').toLowerCase();
+  document.querySelectorAll('.tool-card').forEach(card => {
+    const okGroup = currentFilter === 'all' || card.dataset.group === currentFilter;
+    const okSearch = !q || card.dataset.text.includes(q) || card.textContent.toLowerCase().includes(q);
+    card.style.display = (okGroup && okSearch) ? '' : 'none';
+  });
+}
+document.querySelectorAll('.tool-card').forEach(card => {
+  card.onclick = (e) => {
+    if (e.target.tagName === 'A' || e.target.tagName === 'CODE') return;
+    const detail = card.querySelector('.detail');
+    if (detail) detail.remove();
+    else {
+      const d = document.createElement('p');
+      d.className = 'detail';
+      d.innerHTML = '💡 <em>Tip: each tool works alone from its own folder, with its own README and tests. The suite just routes to them.</em>';
+      card.appendChild(d);
+    }
+  };
+});
+</script>
+</body>
+</html>

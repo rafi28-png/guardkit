@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuardKit Web — CheckFirst + SafeOffer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript><div style="max-width:760px;margin:20px auto;padding:20px;background:#ffe5e5;border-radius:16px;"><strong>JavaScript is off.</strong> GuardKit Web needs JavaScript to check in your browser. Please enable JavaScript, or use the Python tools: <code>python kit.py check &lt;file&gt;</code></div></noscript>
+<main>
+  <header class="hero">
+    <h1 id="title">🛡️ GuardKit Web</h1>
+    <p id="intro">Worldwide trust checks in one app, in English — with Bengali support. Nothing is uploaded — checking happens in your browser.</p>
+    <span class="badge">🌍 Worldwide • English primary • Bengali supported • No upload • No install</span>
+  </header>
+  <details open>
+    <summary><strong id="details-title">What is GuardKit? All seven tools at a glance</strong></summary>
+    <ul>
+      <li><strong>Trust:</strong> SemVer-Diff (catch silent code breaks), CheckFirst (this tab: messages), SafeOffer (next tab: job/loan offers), SecretScan (find secrets before pushing)</li>
+      <li><strong>Efficiency:</strong> TraceLock (pipeline provenance), WattShift (cleaner time to run jobs), ShmPipe (shared-memory data pipes, 6.6x faster than CSV at 5M rows in testing)</li>
+      <li>Try the suite proof from a terminal: <code>python kit.py demo</code> — it runs all seven and writes SUITE_REPORT.md + SUITE_REPORT.html</li>
+    </ul>
+    <p><a href="landing.html">See the full interactive showcase →</a></p>
+  </details>
+  <div class="lang" role="group" aria-label="Language and display">
+    <button id="btn-en" class="active" aria-label="Switch to English">English</button>
+    <button id="btn-bn" aria-label="Switch to Bengali">বাংলা</button>
+    <button id="btn-dark" aria-label="Toggle dark mode">🌙 Dark</button>
+  </div>
+  <div class="tabs">
+    <button id="tab-msg" class="active" onclick="showTab('msg')">✅ Check a Message (CheckFirst)</button>
+    <button id="tab-offer" onclick="showTab('offer')">💰 Check an Offer (SafeOffer)</button>
+  </div>
+
+  <section id="pane-msg">
+    <label id="label-msg" for="msg">Paste a forwarded message here <span class="hint">(do NOT paste OTP, passwords, or bank details)</span></label>
+    <textarea id="msg" rows="7" placeholder="Congratulations! You won lottery... send OTP..." oninput="livePreview('msg')"></textarea>
+    <p class="live" id="live-msg">Type or paste — your live risk preview will appear here, before you even press Check.</p>
+    <div>
+      <span class="chip" onclick="tryChip('msg', 'OTP')">Try: OTP</span>
+      <span class="chip" onclick="tryChip('msg', 'lottery')">Try: lottery</span>
+      <span class="chip" onclick="tryChip('msg', 'bit.ly')">Try: bit.ly</span>
+    </div>
+    <div class="actions">
+      <button class="primary" id="btn-check-msg" onclick="checkMessage()">Check this message</button>
+      <button id="btn-example-msg" onclick="loadMsgExample()">Load scam example</button>
+      <button onclick="clearPane('msg')">Clear</button>
+    </div>
+    <div id="result-msg" class="hidden"><div id="card-msg" class="card"><div id="score-msg"></div><div class="gauge" id="gauge-msg"><div></div></div><h2 id="verdict-msg"></h2><p id="advice-msg"></p></div><ul id="flags-msg"></ul><p id="share-msg"></p><button id="btn-copy" onclick="copyShare('share-msg')">Copy summary</button><button onclick="shareWhatsApp('share-msg')">Share on WhatsApp</button><button onclick="clearPane('msg')">Clear</button></div>
+  </section>
+
+  <section id="pane-offer" class="hidden">
+    <label id="label-offer" for="offer">Paste a job, loan, or deal offer here <span class="hint">(do NOT paste passport or bank details)</span></label>
+    <textarea id="offer" rows="7" placeholder="Urgent job in Cambodia, pay 6 lakh taka cash now..." oninput="livePreview('offer')"></textarea>
+    <p class="live" id="live-offer">Type or paste — your live risk preview will appear here, before you even press Check.</p>
+    <div>
+      <span class="chip" onclick="tryChip('offer', 'tourist visa')">Try: tourist visa</span>
+      <span class="chip" onclick="tryChip('offer', 'cash, no receipt')">Try: cash, no receipt</span>
+      <span class="chip" onclick="tryChip('offer', 'passport kept')">Try: passport kept</span>
+    </div>
+    <div class="actions">
+      <button class="primary" id="btn-check-offer" onclick="checkOffer()">Check this offer</button>
+      <button id="btn-example-offer" onclick="loadOfferExample()">Load fake job example</button>
+      <button onclick="clearPane('offer')">Clear</button>
+    </div>
+    <div id="result-offer" class="hidden"><div id="card-offer" class="card"><div id="score-offer"></div><div class="gauge" id="gauge-offer"><div></div></div><h2 id="verdict-offer"></h2><p id="advice-offer"></p></div><ul id="flags-offer"></ul><ol id="questions-offer"></ol></div>
+  </section>
+
+  <h3 id="history-title">Recent checks on this device (local only, never uploaded)</h3>
+  <ul id="history"><li>No checks yet on this device.</li></ul>
+  <p class="privacy" id="privacy">Privacy: client-side only. Not legal advice, not a proof of truth. GuardKit is a worldwide project — verify with your local official authority, embassy, or employer directly. The other GuardKit tools (SemVer-Diff, TraceLock, WattShift, ShmPipe, SecretScan) are developer tools in their own folders — see the main README.</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

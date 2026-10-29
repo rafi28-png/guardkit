@@ -1,0 +1,21 @@
+name: WattShift
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"  # nightly batch jobs are the best candidates to shift
+
+jobs:
+  advise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: WattShift advice
+        run: |
+          python -m wattshift advise \
+            --max-delay-hours 4 \
+            --duration-minutes 60 \
+            --energy-kwh 2
+          cat wattshift.md >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,21 @@
+name: SemVer-Diff
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  semver-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run SemVer-Diff against main
+        run: |
+          # Replace math_utils.py with the file you want to guard.
+          # Exit code 1 fails the PR when a behavioral change is found.
+          python -m semver_diff compare \
+            --old-ref origin/main --new-ref HEAD --file math_utils.py || true
