@@ -3,31 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GuardKit Web — CheckFirst + SafeOffer</title>
+<title>GuardKit — Verify Before You Trust</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:16px;padding:10px 14px;margin:0 0 16px;box-shadow:0 8px 24px rgba(40,30,120,.12);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.nav strong{margin-right:auto}
+.nav a{color:#141433;text-decoration:none;font-weight:600;padding:6px 10px;border-radius:999px}
+.nav a:hover{background:#eef0ff}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
+.step{background:#fff;border-radius:16px;padding:16px;box-shadow:0 12px 32px rgba(40,30,120,.14)}
+.step b{font-size:28px}
+.step h3{margin:6px 0}
+.step p{margin:0;color:#66667a;font-size:14px;line-height:1.4}
+.tool-card .try{margin-top:10px}
+.tool-card code{font-size:12px;word-break:break-all}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}
+th,td{padding:10px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
+body.dark .nav{background:rgba(30,30,56,.92)}
+body.dark .nav a{color:#f1f1ff}
+body.dark .step,body.dark table{background:#1e1e38}
+body.dark th,body.dark td{border-color:#33335a}
+</style>
 </head>
 <body>
-<noscript><div style="max-width:760px;margin:20px auto;padding:20px;background:#ffe5e5;border-radius:16px;"><strong>JavaScript is off.</strong> GuardKit Web needs JavaScript to check in your browser. Please enable JavaScript, or use the Python tools: <code>python kit.py check &lt;file&gt;</code></div></noscript>
 <main>
+  <nav class="nav"><strong>🛡️ GuardKit</strong><a href="#tools">All 7 tools</a><a href="#checkers">Checkers</a><a href="#workflow">Workflow</a><a href="#proof">Proof</a><a href="landing.html">Showcase</a></nav>
   <header class="hero">
-    <h1 id="title">🛡️ GuardKit Web</h1>
+    <h1 id="title">🛡️ GuardKit</h1>
     <p id="intro">Worldwide trust checks in one app, in English — with Bengali support. Nothing is uploaded — checking happens in your browser.</p>
-    <span class="badge">🌍 Worldwide • English primary • Bengali supported • No upload • No install</span>
+    <p style="margin-top:10px"><strong>Verify before you trust. Make pipelines faster, greener, reproducible.</strong></p>
+    <span class="badge">🌍 Worldwide • 7 tools • Demo: ALL PASS • No upload • No install for the web app</span><br>
+    <a href="#checkers"><button class="primary" style="margin-top:14px">▶ Try the checkers now</button></a>
+    <a href="#tools"><button style="margin-top:14px">See all 7 tools ↓</button></a>
   </header>
-  <details open>
-    <summary><strong id="details-title">What is GuardKit? All seven tools at a glance</strong></summary>
-    <ul>
-      <li><strong>Trust:</strong> SemVer-Diff (catch silent code breaks), CheckFirst (this tab: messages), SafeOffer (next tab: job/loan offers), SecretScan (find secrets before pushing)</li>
-      <li><strong>Efficiency:</strong> TraceLock (pipeline provenance), WattShift (cleaner time to run jobs), ShmPipe (shared-memory data pipes, 6.6x faster than CSV at 5M rows in testing)</li>
-      <li>Try the suite proof from a terminal: <code>python kit.py demo</code> — it runs all seven and writes SUITE_REPORT.md + SUITE_REPORT.html</li>
-    </ul>
-    <p><a href="landing.html">See the full interactive showcase →</a></p>
-  </details>
-  <div class="lang" role="group" aria-label="Language and display">
+
+  <div class="lang" role="group" aria-label="Language and display" style="margin-top:16px">
     <button id="btn-en" class="active" aria-label="Switch to English">English</button>
     <button id="btn-bn" aria-label="Switch to Bengali">বাংলা</button>
     <button id="btn-dark" aria-label="Toggle dark mode">🌙 Dark</button>
   </div>
+
+  <section id="tools">
+    <h2>All 7 tools — not just 2</h2>
+    <p class="privacy">Two tools run right here in your browser. The other five are developer tools that run from a terminal — they are listed here, with their real demo results, so the whole suite is visible on one page, like OmicVerse lists all its modules.</p>
+    <div>
+      <button class="active" id="filter-all" onclick="filterTools('all')">All 7</button>
+      <button id="filter-trust" onclick="filterTools('trust')">🛡️ Trust</button>
+      <button id="filter-eff" onclick="filterTools('eff')">⚡ Efficiency</button>
+      <input id="tool-search" placeholder="Search tools… e.g. scam, carbon, secrets" style="padding:12px; border-radius:999px; border:2px solid #d6d6e6; width:100%; max-width:320px; font-size:16px;" oninput="filterTools(currentFilter)">
+    </div>
+    <div class="tool-grid" id="tool-grid">
+      <div class="tool-card" data-group="trust" data-text="checkfirst message scam forward whatsapp"><h3>✅ CheckFirst — runs here</h3><p>Paste a forwarded message, get a scam / misinformation check. Demo: scam 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('msg')">Open checker →</button></a></p></div>
+      <div class="tool-card" data-group="trust" data-text="safeoffer job loan offer pay money"><h3>💰 SafeOffer — runs here</h3><p>Paste a job / loan offer before you pay. Demo: fake job 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('offer')">Open checker →</button></a></p></div>
+      <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><h3>🔍 SemVer-Diff — terminal</h3><p>Catches silent breaking changes in a “safe” patch. Demo: 4 divergences found.</p><p class="try"><code>python kit.py semver-diff compare old.py new.py</code></p></div>
+      <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><h3>🔐 SecretScan — terminal</h3><p>Scan for hardcoded secrets before you push. Demo: leaky 3 findings, clean 0.</p><p class="try"><code>python kit.py secretscan scan .</code></p></div>
+      <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><h3>🧬 TraceLock — terminal</h3><p>Provenance for pipelines, with corruption alerts. Demo: 50% empty cells flagged.</p><p class="try"><code>python kit.py tracelock run -- python pipeline.py</code></p></div>
+      <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><h3>🌱 WattShift — terminal</h3><p>Cleanest time to run a batch job. Demo: saved 350g CO2 (60.3%).</p><p class="try"><code>python kit.py wattshift advise</code></p></div>
+      <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><h3>⚡ ShmPipe — terminal</h3><p>Shared-memory data pipes. Demo: 6.6x faster than CSV at 5M rows.</p><p class="try"><code>python kit.py shmpipe write data.csv</code></p></div>
+    </div>
+    <p class="privacy">Why only 2 run in the browser? A browser cannot safely run Python, read your files, or measure your pipeline — so those five stay as terminal tools, with their own README and tests in the repo. The web app is their front door, not a replacement.</p>
+  </section>
+
+  <section id="checkers">
   <div class="tabs">
     <button id="tab-msg" class="active" onclick="showTab('msg')">✅ Check a Message (CheckFirst)</button>
     <button id="tab-offer" onclick="showTab('offer')">💰 Check an Offer (SafeOffer)</button>
@@ -66,11 +103,50 @@
     </div>
     <div id="result-offer" class="hidden"><div id="card-offer" class="card"><div id="score-offer"></div><div class="gauge" id="gauge-offer"><div></div></div><h2 id="verdict-offer"></h2><p id="advice-offer"></p></div><ul id="flags-offer"></ul><ol id="questions-offer"></ol></div>
   </section>
+  </section>
+
+  <section id="workflow">
+    <h2>Workflow — how GuardKit works</h2>
+    <div class="steps">
+      <div class="step"><b>1️⃣</b><h3>Choose a tool</h3><p>Message or offer here, or a terminal tool for code, pipelines, secrets, carbon, or data.</p></div>
+      <div class="step"><b>2️⃣</b><h3>Paste or run</h3><p>Paste the text in your browser, or run <code>python kit.py demo</code> in a terminal. Nothing is uploaded from the web app.</p></div>
+      <div class="step"><b>3️⃣</b><h3>Get a verdict</h3><p>A score out of 100, RED / AMBER / GREEN, with the exact flags found — not just “scam” or “safe”.</p></div>
+      <div class="step"><b>4️⃣</b><h3>Decide, then prove</h3><p>Do not pay or forward on RED. Share the summary, or run the full suite proof and keep the report.</p></div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <h2>Proof, not promises</h2>
+    <table><tr><th>Tool</th><th>Demo result</th></tr>
+    <tr><td>SemVer-Diff</td><td>PASS — 4 divergences</td></tr>
+    <tr><td>TraceLock</td><td>PASS — no alerts on good pipeline</td></tr>
+    <tr><td>WattShift</td><td>PASS — 350g saved</td></tr>
+    <tr><td>ShmPipe</td><td>PASS — round-trip OK</td></tr>
+    <tr><td>SafeOffer</td><td>PASS — 100/100 RED</td></tr>
+    <tr><td>CheckFirst</td><td>PASS — 100/100 RED</td></tr>
+    <tr><td>SecretScan</td><td>PASS — leaky flagged, clean passed</td></tr></table>
+  </section>
 
   <h3 id="history-title">Recent checks on this device (local only, never uploaded)</h3>
   <ul id="history"><li>No checks yet on this device.</li></ul>
   <p class="privacy" id="privacy">Privacy: client-side only. Not legal advice, not a proof of truth. GuardKit is a worldwide project — verify with your local official authority, embassy, or employer directly. The other GuardKit tools (SemVer-Diff, TraceLock, WattShift, ShmPipe, SecretScan) are developer tools in their own folders — see the main README.</p>
+  <p><a href="landing.html">See the full interactive showcase →</a> &nbsp;|&nbsp; <a href="https://github.com/rafi28-png/guardkit">GuardKit on GitHub →</a></p>
 </main>
 <script src="app.js"></script>
+<script>
+let currentFilter = 'all';
+function filterTools(group) {
+  if (group) currentFilter = group;
+  document.getElementById('filter-all').className = currentFilter === 'all' ? 'active' : '';
+  document.getElementById('filter-trust').className = currentFilter === 'trust' ? 'active' : '';
+  document.getElementById('filter-eff').className = currentFilter === 'eff' ? 'active' : '';
+  const q = (document.getElementById('tool-search').value || '').toLowerCase();
+  document.querySelectorAll('.tool-card').forEach(card => {
+    const okGroup = currentFilter === 'all' || card.dataset.group === currentFilter;
+    const okSearch = !q || card.dataset.text.includes(q) || card.textContent.toLowerCase().includes(q);
+    card.style.display = (okGroup && okSearch) ? '' : 'none';
+  });
+}
+</script>
 </body>
 </html>
