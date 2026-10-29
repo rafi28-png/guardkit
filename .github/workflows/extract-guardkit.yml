@@ -5,7 +5,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   extract:
@@ -31,6 +30,20 @@ jobs:
           # Remove the zip and this helper workflow so the final tree holds only the suite
           rm -f guardkit.zip
           rm -f .github/workflows/extract-guardkit.yml
+          # The GITHUB_TOKEN cannot create files under .github/workflows, so any
+          # suite workflow files are printed to the log and committed afterwards
+          # via the web UI instead of being pushed by this job.
+          if [ -d .github/workflows ]; then
+            for f in .github/workflows/*.yml; do
+              [ -e "$f" ] || continue
+              echo "===== BEGIN $f ====="
+              cat "$f"
+              echo "===== END $f ====="
+              rm -f "$f"
+            done
+            rmdir .github/workflows 2>/dev/null || true
+            rmdir .github 2>/dev/null || true
+          fi
           FILE_COUNT=$(find . -path ./.git -prune -o -type f -print | wc -l)
           echo "Final file count (excluding .git): $FILE_COUNT"
           echo "Top-level entries:"
@@ -40,5 +53,10 @@ jobs:
           git add -A
           echo "Staged changes (first 60 lines):"
           git status --short | head -60
-          git commit -m 'GuardKit v0.6.5: 7-tool suite — verify before you trust, faster, greener, reproducible pipelines'
-          git push
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m 'GuardKit v0.6.5: 7-tool suite — verify before you trust, faster, greener, reproducible pipelines'
+            git pull --rebase origin main
+            git push
+          fi
