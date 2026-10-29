@@ -1,0 +1,26 @@
+name: GuardKit Suite
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install optional ShmPipe dependency
+        run: pip install pyarrow pytest || echo "pyarrow install failed - ShmPipe will be skipped in demo, other tools still run"
+      - name: Run suite demo (all six proofs)
+        run: python kit.py demo
+      - name: Run suite smoke tests
+        run: python -c "import sys; sys.path.insert(0, 'tests'); import test_suite; test_suite.test_all_seven(); print('PASS')"
+      - name: Upload suite report
+        uses: actions/upload-artifact@v4
+        with:
+          name: suite-report
+          path: SUITE_REPORT.md
