@@ -27,14 +27,14 @@ body.dark th,body.dark td{border-color:#33335a}
 </head>
 <body>
 <main>
-  <nav class="nav"><strong>🛡️ GuardKit</strong><a href="#tools">All 7 tools</a><a href="#checkers">Checkers</a><a href="#workflow">Workflow</a><a href="#proof">Proof</a><a href="landing.html">Showcase</a></nav>
+  <nav class="nav"><strong>🛡️ GuardKit</strong><a href="#tools">All 7 tools</a><a href="#checkers">Checkers</a><a href="#live-tools">Live tools</a><a href="#workflow">Workflow</a><a href="#proof">Proof</a><a href="landing.html">Showcase</a></nav>
   <header class="hero">
     <h1 id="title">🛡️ GuardKit</h1>
     <p id="intro">Worldwide trust checks in one app, in English — with Bengali support. Nothing is uploaded — checking happens in your browser.</p>
     <p style="margin-top:10px"><strong>Verify before you trust. Make pipelines faster, greener, reproducible.</strong></p>
     <span class="badge">🌍 Worldwide • 7 tools • Demo: ALL PASS • No upload • No install for the web app</span><br>
     <a href="#checkers"><button class="primary" style="margin-top:14px">▶ Try the checkers now</button></a>
-    <a href="#tools"><button style="margin-top:14px">See all 7 tools ↓</button></a>
+    <a href="#live-tools"><button style="margin-top:14px">Try all 7, live ↓</button></a>
   </header>
 
   <div class="lang" role="group" aria-label="Language and display" style="margin-top:16px">
@@ -44,8 +44,8 @@ body.dark th,body.dark td{border-color:#33335a}
   </div>
 
   <section id="tools">
-    <h2>All 7 tools — not just 2</h2>
-    <p class="privacy">Two tools run right here in your browser. The other five are developer tools that run from a terminal — they are listed here, with their real demo results, so the whole suite is visible on one page, like OmicVerse lists all its modules.</p>
+    <h2>All 7 tools — all live in your browser</h2>
+    <p class="privacy">All seven tools now run here, on your own input, in your browser — no demo numbers pretending to be a run. CheckFirst and SafeOffer are above in the checkers; the other five are in the live-tools section below, each in a limited web form. The full Python versions are in the repo, and each web panel says exactly what its limits are.</p>
     <div>
       <button class="active" id="filter-all" onclick="filterTools('all')">All 7</button>
       <button id="filter-trust" onclick="filterTools('trust')">🛡️ Trust</button>
@@ -55,13 +55,13 @@ body.dark th,body.dark td{border-color:#33335a}
     <div class="tool-grid" id="tool-grid">
       <div class="tool-card" data-group="trust" data-text="checkfirst message scam forward whatsapp"><h3>✅ CheckFirst — runs here</h3><p>Paste a forwarded message, get a scam / misinformation check. Demo: scam 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('msg')">Open checker →</button></a></p></div>
       <div class="tool-card" data-group="trust" data-text="safeoffer job loan offer pay money"><h3>💰 SafeOffer — runs here</h3><p>Paste a job / loan offer before you pay. Demo: fake job 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('offer')">Open checker →</button></a></p></div>
-      <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><h3>🔍 SemVer-Diff — terminal</h3><p>Catches silent breaking changes in a “safe” patch. Demo: 4 divergences found.</p><p class="try"><code>python kit.py semver-diff compare old.py new.py</code></p></div>
-      <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><h3>🔐 SecretScan — terminal</h3><p>Scan for hardcoded secrets before you push. Demo: leaky 3 findings, clean 0.</p><p class="try"><code>python kit.py secretscan scan .</code></p></div>
-      <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><h3>🧬 TraceLock — terminal</h3><p>Provenance for pipelines, with corruption alerts. Demo: 50% empty cells flagged.</p><p class="try"><code>python kit.py tracelock run -- python pipeline.py</code></p></div>
-      <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><h3>🌱 WattShift — terminal</h3><p>Cleanest time to run a batch job. Demo: saved 350g CO2 (60.3%).</p><p class="try"><code>python kit.py wattshift advise</code></p></div>
-      <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><h3>⚡ ShmPipe — terminal</h3><p>Shared-memory data pipes. Demo: 6.6x faster than CSV at 5M rows.</p><p class="try"><code>python kit.py shmpipe write data.csv</code></p></div>
+      <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><h3>🔍 SemVer-Diff — live here</h3><p>Compare an old and a new JavaScript function on your own test inputs. <a href="#panel-semver">Try it live →</a></p><p class="try"><code>python kit.py semver-diff compare old.py new.py</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><h3>🔐 SecretScan — live here</h3><p>Paste code or config and scan it for real secret patterns. <a href="#panel-secrets">Try it live →</a></p><p class="try"><code>python kit.py secretscan scan .</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><h3>🧬 TraceLock — live here</h3><p>Upload two CSVs in your browser and get a real provenance report. <a href="#panel-trace">Try it live →</a></p><p class="try"><code>python kit.py tracelock run -- python pipeline.py</code> (full pipeline version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><h3>🌱 WattShift — live here</h3><p>Fetch the live UK carbon forecast and find the cleanest slot. <a href="#panel-watt">Try it live →</a></p><p class="try"><code>python kit.py wattshift advise</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><h3>⚡ ShmPipe — live here</h3><p>Run a real CSV-vs-binary speed test in this browser. <a href="#panel-shm">Try it live →</a></p><p class="try"><code>python kit.py shmpipe write data.csv</code> (full Arrow version)</p></div>
     </div>
-    <p class="privacy">Why only 2 run in the browser? A browser cannot safely run Python, read your files, or measure your pipeline — so those five stay as terminal tools, with their own README and tests in the repo. The web app is their front door, not a replacement.</p>
+    <p class="privacy">Each web panel is a limited form of its tool — the limits are written on the panel itself. The full Python versions, with their own README and tests, are in the repo.</p>
   </section>
 
   <section id="checkers">
@@ -105,11 +105,63 @@ body.dark th,body.dark td{border-color:#33335a}
   </section>
   </section>
 
+  <section id="live-tools">
+    <h2>Try all 7 tools — live, in your browser</h2>
+    <p class="privacy">Everything below runs on input you type or files you choose, in this browser only. Nothing is uploaded. Results are computed live — they are not pre-baked demo numbers.</p>
+
+    <div class="tool-card" id="panel-secrets" style="margin:16px 0">
+      <h3>🔐 SecretScan — live</h3>
+      <p>Paste code or config. Scans for AWS keys, GitHub tokens, Slack tokens, private-key blocks, and password / api_key assignments. Values are never shown — only type and line.</p>
+      <textarea id="ss-input" rows="6" placeholder="Paste code or config here — do NOT paste a real secret you still use. Rotate any secret you paste anywhere."></textarea>
+      <div class="actions"><button class="primary" onclick="runSecretScan()">Scan for secrets</button><button onclick="loadSecretExample()">Load leaky example</button></div>
+      <div id="ss-out"></div>
+      <p class="privacy">Limit: pattern-based only. It cannot prove a file is safe, and it cannot scan a whole repo from a browser — the Python version scans files on disk.</p>
+    </div>
+
+    <div class="tool-card" id="panel-semver" style="margin:16px 0">
+      <h3>🔍 SemVer-Diff Web — live</h3>
+      <p>Compare two JavaScript functions on your own inputs. Web version works on JavaScript functions; the full Python AST version is in the repo (semver-diff/). Only run code you have read — never paste untrusted code here.</p>
+      <label for="sv-old">OLD function</label>
+      <textarea id="sv-old" rows="3" placeholder="function round_half(x){ return Math.round(x); }"></textarea>
+      <label for="sv-new">NEW function</label>
+      <textarea id="sv-new" rows="3" placeholder="function round_half(x){ return Math.floor(x + 0.5); }"></textarea>
+      <label for="sv-inputs">Test inputs (separate groups with | )</label>
+      <textarea id="sv-inputs" rows="2" placeholder="2.5 | 3.5 | -2.5"></textarea>
+      <div class="actions"><button class="primary" onclick="runSemVerWeb()">Compare old vs new</button><button onclick="loadSemVerExample()">Load rounding example</button></div>
+      <div id="sv-out"></div>
+    </div>
+
+    <div class="tool-card" id="panel-trace" style="margin:16px 0">
+      <h3>🧬 TraceLock Web — live</h3>
+      <p>Choose a before-CSV and an after-CSV. Files are read in your browser only, never uploaded. Web version works on CSV files in your browser; full pipeline version is in the repo (tracelock/).</p>
+      <label>Before CSV <input type="file" id="tl-before" accept=".csv,text/csv"></label><br>
+      <label>After CSV <input type="file" id="tl-after" accept=".csv,text/csv"></label>
+      <div class="actions"><button class="primary" onclick="runTraceWeb()">Build provenance report</button></div>
+      <div id="tl-out"></div>
+    </div>
+
+    <div class="tool-card" id="panel-watt" style="margin:16px 0">
+      <h3>🌱 WattShift Web — live</h3>
+      <p>Fetches the live UK Carbon Intensity forecast from api.carbonintensity.org.uk (no key needed). If the API cannot be reached, it says so plainly — no fallback numbers are shown as live data.</p>
+      <label for="ws-kwh">Energy to run (kWh) <input type="number" id="ws-kwh" value="2" min="0.1" step="0.1" style="padding:10px;border-radius:12px;border:2px solid #d6d6e6;width:120px"></label>
+      <div class="actions"><button class="primary" onclick="runWattWeb()">Fetch live forecast</button></div>
+      <div id="ws-out"></div>
+    </div>
+
+    <div class="tool-card" id="panel-shm" style="margin:16px 0">
+      <h3>⚡ ShmPipe Web — live</h3>
+      <p>Generates rows in this browser, times a CSV string parse against a binary ArrayBuffer round-trip, and verifies the round-trip matches. Browser version measures CSV vs binary in your browser; the Python Arrow + mmap version is in the repo (shmpipe/) and measured 6.6x at 5M rows.</p>
+      <label for="shm-n">Rows <select id="shm-n" style="padding:10px;border-radius:12px;border:2px solid #d6d6e6"><option value="10000">10,000</option><option value="100000" selected>100,000</option></select></label>
+      <div class="actions"><button class="primary" onclick="runShmWeb()">Run speed test</button></div>
+      <div id="shm-out"></div>
+    </div>
+  </section>
+
   <section id="workflow">
     <h2>Workflow — how GuardKit works</h2>
     <div class="steps">
-      <div class="step"><b>1️⃣</b><h3>Choose a tool</h3><p>Message or offer here, or a terminal tool for code, pipelines, secrets, carbon, or data.</p></div>
-      <div class="step"><b>2️⃣</b><h3>Paste or run</h3><p>Paste the text in your browser, or run <code>python kit.py demo</code> in a terminal. Nothing is uploaded from the web app.</p></div>
+      <div class="step"><b>1️⃣</b><h3>Choose a tool</h3><p>Message or offer here, or a live panel below for code, pipelines, secrets, carbon, or data.</p></div>
+      <div class="step"><b>2️⃣</b><h3>Paste or run</h3><p>Paste the text in your browser, choose files, or run the full <code>python kit.py demo</code> in a terminal. Nothing is uploaded from the web app.</p></div>
       <div class="step"><b>3️⃣</b><h3>Get a verdict</h3><p>A score out of 100, RED / AMBER / GREEN, with the exact flags found — not just “scam” or “safe”.</p></div>
       <div class="step"><b>4️⃣</b><h3>Decide, then prove</h3><p>Do not pay or forward on RED. Share the summary, or run the full suite proof and keep the report.</p></div>
     </div>
@@ -133,6 +185,7 @@ body.dark th,body.dark td{border-color:#33335a}
   <p><a href="landing.html">See the full interactive showcase →</a> &nbsp;|&nbsp; <a href="https://github.com/rafi28-png/guardkit">GuardKit on GitHub →</a></p>
 </main>
 <script src="app.js"></script>
+<script src="tools.js"></script>
 <script>
 let currentFilter = 'all';
 function filterTools(group) {
