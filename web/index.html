@@ -5,111 +5,107 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GuardKit — Verify Before You Trust</title>
 <link rel="stylesheet" href="style.css">
-<style>
-.nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:16px;padding:10px 14px;margin:0 0 16px;box-shadow:0 8px 24px rgba(40,30,120,.12);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.nav strong{margin-right:auto}
-.nav a{color:#141433;text-decoration:none;font-weight:600;padding:6px 10px;border-radius:999px}
-.nav a:hover{background:#eef0ff}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
-.step{background:#fff;border-radius:16px;padding:16px;box-shadow:0 12px 32px rgba(40,30,120,.14)}
-.step b{font-size:28px}
-.step h3{margin:6px 0}
-.step p{margin:0;color:#66667a;font-size:14px;line-height:1.4}
-.tool-card .try{margin-top:10px}
-.tool-card code{font-size:12px;word-break:break-all}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}
-th,td{padding:10px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
-body.dark .nav{background:rgba(30,30,56,.92)}
-body.dark .nav a{color:#f1f1ff}
-body.dark .step,body.dark table{background:#1e1e38}
-body.dark th,body.dark td{border-color:#33335a}
-</style>
 </head>
 <body>
-<main>
-  <nav class="nav"><strong>🛡️ GuardKit</strong><a href="#tools">All 7 tools</a><a href="#checkers">Checkers</a><a href="#live-tools">Live tools</a><a href="#workflow">Workflow</a><a href="#proof">Proof</a><a href="landing.html">Showcase</a></nav>
+<header class="appbar">
+  <div class="appbar-row">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9.3-8 11-4.5-1.7-8-6-8-11V5l8-3z" fill="currentColor"/><path d="M9 12l2 2 4-4" stroke="#1e1b4b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="logo-name">GuardKit<small>Verify before you trust</small></span></a>
+    <div class="lang" role="group" aria-label="Language and display">
+      <button id="btn-en" class="active" aria-label="Switch to English">English</button>
+      <button id="btn-bn" aria-label="Switch to Bengali">বাংলা</button>
+      <button id="btn-dark" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </div>
+  <nav class="pill-nav" aria-label="Tools">
+    <a href="#tools">All tools</a><a href="#checkers">Checkers</a><a href="#panel-secrets">SecretScan</a><a href="#panel-semver">SemVer</a><a href="#panel-trace">TraceLock</a><a href="#panel-watt">WattShift</a><a href="#panel-shm">ShmPipe</a><a href="#workflow">Workflow</a><a href="#proof">Proof</a>
+  </nav>
+</header>
+<main id="top">
   <header class="hero">
-    <h1 id="title">🛡️ GuardKit</h1>
+    <h1 id="title">Verify before<br>you trust.</h1>
     <p id="intro">Worldwide trust checks in one app, in English — with Bengali support. Nothing is uploaded — checking happens in your browser.</p>
-    <p style="margin-top:10px"><strong>Verify before you trust. Make pipelines faster, greener, reproducible.</strong></p>
-    <span class="badge">🌍 Worldwide • 7 tools • Demo: ALL PASS • No upload • No install for the web app</span><br>
-    <a href="#checkers"><button class="primary" style="margin-top:14px">▶ Try the checkers now</button></a>
-    <a href="#live-tools"><button style="margin-top:14px">Try all 7, live ↓</button></a>
+    <p><strong>Make pipelines faster, greener, reproducible.</strong></p>
+    <div class="stat-chips" aria-label="GuardKit at a glance">
+      <span class="stat-chip">🛡️ 7 live tools</span>
+      <span class="stat-chip">🔒 0 uploads</span>
+      <span class="stat-chip">📱 Works on your phone</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#checkers"><button class="primary">▶ Try a checker</button></a>
+      <a href="#tools"><button>See all tools ↓</button></a>
+    </div>
   </header>
 
-  <div class="lang" role="group" aria-label="Language and display" style="margin-top:16px">
-    <button id="btn-en" class="active" aria-label="Switch to English">English</button>
-    <button id="btn-bn" aria-label="Switch to Bengali">বাংলা</button>
-    <button id="btn-dark" aria-label="Toggle dark mode">🌙 Dark</button>
-  </div>
-
   <section id="tools">
-    <h2>All 7 tools — all live in your browser</h2>
-    <p class="privacy">All seven tools now run here, on your own input, in your browser — no demo numbers pretending to be a run. CheckFirst and SafeOffer are above in the checkers; the other five are in the live-tools section below, each in a limited web form. The full Python versions are in the repo, and each web panel says exactly what its limits are.</p>
-    <div>
+    <p class="section-kicker">The suite</p>
+    <h2>All 7 tools, live in your browser</h2>
+    <p class="lead privacy">Every tool below runs here, on your own input, in your browser. The full Python versions are in the repo, and each live panel says exactly what its web form can and cannot do.</p>
+    <div class="search-row">
       <button class="active" id="filter-all" onclick="filterTools('all')">All 7</button>
       <button id="filter-trust" onclick="filterTools('trust')">🛡️ Trust</button>
       <button id="filter-eff" onclick="filterTools('eff')">⚡ Efficiency</button>
-      <input id="tool-search" placeholder="Search tools… e.g. scam, carbon, secrets" style="padding:12px; border-radius:999px; border:2px solid #d6d6e6; width:100%; max-width:320px; font-size:16px;" oninput="filterTools(currentFilter)">
+      <input id="tool-search" placeholder="Search tools… e.g. scam, carbon, secrets" oninput="filterTools(currentFilter)">
     </div>
     <div class="tool-grid" id="tool-grid">
-      <div class="tool-card" data-group="trust" data-text="checkfirst message scam forward whatsapp"><h3>✅ CheckFirst — runs here</h3><p>Paste a forwarded message, get a scam / misinformation check. Demo: scam 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('msg')">Open checker →</button></a></p></div>
-      <div class="tool-card" data-group="trust" data-text="safeoffer job loan offer pay money"><h3>💰 SafeOffer — runs here</h3><p>Paste a job / loan offer before you pay. Demo: fake job 100/100 RED.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('offer')">Open checker →</button></a></p></div>
-      <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><h3>🔍 SemVer-Diff — live here</h3><p>Compare an old and a new JavaScript function on your own test inputs. <a href="#panel-semver">Try it live →</a></p><p class="try"><code>python kit.py semver-diff compare old.py new.py</code> (full Python version)</p></div>
-      <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><h3>🔐 SecretScan — live here</h3><p>Paste code or config and scan it for real secret patterns. <a href="#panel-secrets">Try it live →</a></p><p class="try"><code>python kit.py secretscan scan .</code> (full Python version)</p></div>
-      <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><h3>🧬 TraceLock — live here</h3><p>Upload two CSVs in your browser and get a real provenance report. <a href="#panel-trace">Try it live →</a></p><p class="try"><code>python kit.py tracelock run -- python pipeline.py</code> (full pipeline version)</p></div>
-      <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><h3>🌱 WattShift — live here</h3><p>Fetch the live UK carbon forecast and find the cleanest slot. <a href="#panel-watt">Try it live →</a></p><p class="try"><code>python kit.py wattshift advise</code> (full Python version)</p></div>
-      <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><h3>⚡ ShmPipe — live here</h3><p>Run a real CSV-vs-binary speed test in this browser. <a href="#panel-shm">Try it live →</a></p><p class="try"><code>python kit.py shmpipe write data.csv</code> (full Arrow version)</p></div>
+      <div class="tool-card" data-group="trust" data-text="checkfirst message scam forward whatsapp"><span class="tool-tag">Trust · Live</span><span class="tool-icon" aria-hidden="true">✅</span><h3>CheckFirst</h3><p>Paste a forwarded message and get a scam / misinformation check, live.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('msg')">Try live →</button></a></p></div>
+      <div class="tool-card" data-group="trust" data-text="safeoffer job loan offer pay money"><span class="tool-tag">Trust · Live</span><span class="tool-icon" aria-hidden="true">💰</span><h3>SafeOffer</h3><p>Paste a job / loan offer before you pay, and get a live risk check.</p><p class="try"><a href="#checkers"><button class="primary" onclick="showTab('offer')">Try live →</button></a></p></div>
+      <div class="tool-card" data-group="trust" data-text="semver diff breaking change code patch"><span class="tool-tag">Trust · Live</span><span class="tool-icon" aria-hidden="true">🔍</span><h3>SemVer-Diff</h3><p>Compare an old and a new function on your own test inputs, live.</p><p class="try"><a href="#panel-semver"><button class="primary">Try live →</button></a></p><p class="try"><code>python kit.py semver-diff compare old.py new.py</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="trust" data-text="secretscan secrets github push token"><span class="tool-tag">Trust · Live</span><span class="tool-icon" aria-hidden="true">🔐</span><h3>SecretScan</h3><p>Paste code or config and scan it for real secret patterns, live.</p><p class="try"><a href="#panel-secrets"><button class="primary">Try live →</button></a></p><p class="try"><code>python kit.py secretscan scan .</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="tracelock provenance pipeline"><span class="tool-tag">Efficiency · Live</span><span class="tool-icon" aria-hidden="true">🧬</span><h3>TraceLock</h3><p>Upload two CSVs in your browser and get a real provenance report, live.</p><p class="try"><a href="#panel-trace"><button class="primary">Try live →</button></a></p><p class="try"><code>python kit.py tracelock run -- python pipeline.py</code> (full pipeline version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="wattshift carbon green energy"><span class="tool-tag">Efficiency · Live</span><span class="tool-icon" aria-hidden="true">🌱</span><h3>WattShift</h3><p>Fetch the live UK carbon forecast and find the cleanest slot, live.</p><p class="try"><a href="#panel-watt"><button class="primary">Try live →</button></a></p><p class="try"><code>python kit.py wattshift advise</code> (full Python version)</p></div>
+      <div class="tool-card" data-group="eff" data-text="shmpipe shared memory arrow fast csv"><span class="tool-tag">Efficiency · Live</span><span class="tool-icon" aria-hidden="true">⚡</span><h3>ShmPipe</h3><p>Run a real CSV-vs-binary speed test in this browser, live.</p><p class="try"><a href="#panel-shm"><button class="primary">Try live →</button></a></p><p class="try"><code>python kit.py shmpipe write data.csv</code> (full Arrow version)</p></div>
     </div>
-    <p class="privacy">Each web panel is a limited form of its tool — the limits are written on the panel itself. The full Python versions, with their own README and tests, are in the repo.</p>
   </section>
 
-  <section id="checkers">
-  <div class="tabs">
-    <button id="tab-msg" class="active" onclick="showTab('msg')">✅ Check a Message (CheckFirst)</button>
-    <button id="tab-offer" onclick="showTab('offer')">💰 Check an Offer (SafeOffer)</button>
-  </div>
+  <section id="checkers" class="checker-shell">
+    <p class="section-kicker">Checkers</p>
+    <h2>Check a message or an offer</h2>
+    <div class="tabs">
+      <button id="tab-msg" class="active" onclick="showTab('msg')">✅ Check a Message (CheckFirst)</button>
+      <button id="tab-offer" onclick="showTab('offer')">💰 Check an Offer (SafeOffer)</button>
+    </div>
 
-  <section id="pane-msg">
-    <label id="label-msg" for="msg">Paste a forwarded message here <span class="hint">(do NOT paste OTP, passwords, or bank details)</span></label>
-    <textarea id="msg" rows="7" placeholder="Congratulations! You won lottery... send OTP..." oninput="livePreview('msg')"></textarea>
-    <p class="live" id="live-msg">Type or paste — your live risk preview will appear here, before you even press Check.</p>
-    <div>
-      <span class="chip" onclick="tryChip('msg', 'OTP')">Try: OTP</span>
-      <span class="chip" onclick="tryChip('msg', 'lottery')">Try: lottery</span>
-      <span class="chip" onclick="tryChip('msg', 'bit.ly')">Try: bit.ly</span>
-    </div>
-    <div class="actions">
-      <button class="primary" id="btn-check-msg" onclick="checkMessage()">Check this message</button>
-      <button id="btn-example-msg" onclick="loadMsgExample()">Load scam example</button>
-      <button onclick="clearPane('msg')">Clear</button>
-    </div>
-    <div id="result-msg" class="hidden"><div id="card-msg" class="card"><div id="score-msg"></div><div class="gauge" id="gauge-msg"><div></div></div><h2 id="verdict-msg"></h2><p id="advice-msg"></p></div><ul id="flags-msg"></ul><p id="share-msg"></p><button id="btn-copy" onclick="copyShare('share-msg')">Copy summary</button><button onclick="shareWhatsApp('share-msg')">Share on WhatsApp</button><button onclick="clearPane('msg')">Clear</button></div>
-  </section>
+    <section id="pane-msg">
+      <label id="label-msg" for="msg">Paste a forwarded message here <span class="hint">(do NOT paste OTP, passwords, or bank details)</span></label>
+      <textarea id="msg" rows="7" placeholder="Congratulations! You won lottery... send OTP..." oninput="livePreview('msg')"></textarea>
+      <p class="live" id="live-msg">Type or paste — your live risk preview will appear here, before you even press Check.</p>
+      <div>
+        <span class="chip" onclick="tryChip('msg', 'OTP')">Try: OTP</span>
+        <span class="chip" onclick="tryChip('msg', 'lottery')">Try: lottery</span>
+        <span class="chip" onclick="tryChip('msg', 'bit.ly')">Try: bit.ly</span>
+      </div>
+      <div class="actions">
+        <button class="primary" id="btn-check-msg" onclick="checkMessage()">Check this message</button>
+        <button id="btn-example-msg" onclick="loadMsgExample()">Load scam example</button>
+        <button onclick="clearPane('msg')">Clear</button>
+      </div>
+      <div id="result-msg" class="hidden"><div id="card-msg" class="card"><div id="score-msg"></div><div class="gauge" id="gauge-msg"><div></div></div><h2 id="verdict-msg"></h2><p id="advice-msg"></p></div><ul id="flags-msg"></ul><p id="share-msg"></p><button id="btn-copy" onclick="copyShare('share-msg')">Copy summary</button><button onclick="shareWhatsApp('share-msg')">Share on WhatsApp</button><button onclick="clearPane('msg')">Clear</button></div>
+    </section>
 
-  <section id="pane-offer" class="hidden">
-    <label id="label-offer" for="offer">Paste a job, loan, or deal offer here <span class="hint">(do NOT paste passport or bank details)</span></label>
-    <textarea id="offer" rows="7" placeholder="Urgent job in Cambodia, pay 6 lakh taka cash now..." oninput="livePreview('offer')"></textarea>
-    <p class="live" id="live-offer">Type or paste — your live risk preview will appear here, before you even press Check.</p>
-    <div>
-      <span class="chip" onclick="tryChip('offer', 'tourist visa')">Try: tourist visa</span>
-      <span class="chip" onclick="tryChip('offer', 'cash, no receipt')">Try: cash, no receipt</span>
-      <span class="chip" onclick="tryChip('offer', 'passport kept')">Try: passport kept</span>
-    </div>
-    <div class="actions">
-      <button class="primary" id="btn-check-offer" onclick="checkOffer()">Check this offer</button>
-      <button id="btn-example-offer" onclick="loadOfferExample()">Load fake job example</button>
-      <button onclick="clearPane('offer')">Clear</button>
-    </div>
-    <div id="result-offer" class="hidden"><div id="card-offer" class="card"><div id="score-offer"></div><div class="gauge" id="gauge-offer"><div></div></div><h2 id="verdict-offer"></h2><p id="advice-offer"></p></div><ul id="flags-offer"></ul><ol id="questions-offer"></ol></div>
-  </section>
+    <section id="pane-offer" class="hidden">
+      <label id="label-offer" for="offer">Paste a job, loan, or deal offer here <span class="hint">(do NOT paste passport or bank details)</span></label>
+      <textarea id="offer" rows="7" placeholder="Urgent job in Cambodia, pay 6 lakh taka cash now..." oninput="livePreview('offer')"></textarea>
+      <p class="live" id="live-offer">Type or paste — your live risk preview will appear here, before you even press Check.</p>
+      <div>
+        <span class="chip" onclick="tryChip('offer', 'tourist visa')">Try: tourist visa</span>
+        <span class="chip" onclick="tryChip('offer', 'cash, no receipt')">Try: cash, no receipt</span>
+        <span class="chip" onclick="tryChip('offer', 'passport kept')">Try: passport kept</span>
+      </div>
+      <div class="actions">
+        <button class="primary" id="btn-check-offer" onclick="checkOffer()">Check this offer</button>
+        <button id="btn-example-offer" onclick="loadOfferExample()">Load fake job example</button>
+        <button onclick="clearPane('offer')">Clear</button>
+      </div>
+      <div id="result-offer" class="hidden"><div id="card-offer" class="card"><div id="score-offer"></div><div class="gauge" id="gauge-offer"><div></div></div><h2 id="verdict-offer"></h2><p id="advice-offer"></p></div><ul id="flags-offer"></ul><ol id="questions-offer"></ol></div>
+    </section>
   </section>
 
   <section id="live-tools">
-    <h2>Try all 7 tools — live, in your browser</h2>
-    <p class="privacy">Everything below runs on input you type or files you choose, in this browser only. Nothing is uploaded. Results are computed live — they are not pre-baked demo numbers.</p>
+    <p class="section-kicker">Live tools</p>
+    <h2>Try the other five, live</h2>
+    <p class="privacy">Everything below runs on input you type or files you choose, in this browser only. Nothing is uploaded. Results are computed live.</p>
 
-    <div class="tool-card" id="panel-secrets" style="margin:16px 0">
+    <div class="live-panel" id="panel-secrets">
       <h3>🔐 SecretScan — live</h3>
       <p>Paste code or config. Scans for AWS keys, GitHub tokens, Slack tokens, private-key blocks, and password / api_key assignments. Values are never shown — only type and line.</p>
       <textarea id="ss-input" rows="6" placeholder="Paste code or config here — do NOT paste a real secret you still use. Rotate any secret you paste anywhere."></textarea>
@@ -118,7 +114,7 @@ body.dark th,body.dark td{border-color:#33335a}
       <p class="privacy">Limit: pattern-based only. It cannot prove a file is safe, and it cannot scan a whole repo from a browser — the Python version scans files on disk.</p>
     </div>
 
-    <div class="tool-card" id="panel-semver" style="margin:16px 0">
+    <div class="live-panel" id="panel-semver">
       <h3>🔍 SemVer-Diff Web — live</h3>
       <p>Compare two JavaScript functions on your own inputs. Web version works on JavaScript functions; the full Python AST version is in the repo (semver-diff/). Only run code you have read — never paste untrusted code here.</p>
       <label for="sv-old">OLD function</label>
@@ -131,7 +127,7 @@ body.dark th,body.dark td{border-color:#33335a}
       <div id="sv-out"></div>
     </div>
 
-    <div class="tool-card" id="panel-trace" style="margin:16px 0">
+    <div class="live-panel" data-accent="eff" id="panel-trace">
       <h3>🧬 TraceLock Web — live</h3>
       <p>Choose a before-CSV and an after-CSV. Files are read in your browser only, never uploaded. Web version works on CSV files in your browser; full pipeline version is in the repo (tracelock/).</p>
       <label>Before CSV <input type="file" id="tl-before" accept=".csv,text/csv"></label><br>
@@ -140,7 +136,7 @@ body.dark th,body.dark td{border-color:#33335a}
       <div id="tl-out"></div>
     </div>
 
-    <div class="tool-card" id="panel-watt" style="margin:16px 0">
+    <div class="live-panel" data-accent="eff" id="panel-watt">
       <h3>🌱 WattShift Web — live</h3>
       <p>Fetches the live UK Carbon Intensity forecast from api.carbonintensity.org.uk (no key needed). If the API cannot be reached, it says so plainly — no fallback numbers are shown as live data.</p>
       <label for="ws-kwh">Energy to run (kWh) <input type="number" id="ws-kwh" value="2" min="0.1" step="0.1" style="padding:10px;border-radius:12px;border:2px solid #d6d6e6;width:120px"></label>
@@ -148,7 +144,7 @@ body.dark th,body.dark td{border-color:#33335a}
       <div id="ws-out"></div>
     </div>
 
-    <div class="tool-card" id="panel-shm" style="margin:16px 0">
+    <div class="live-panel" data-accent="eff" id="panel-shm">
       <h3>⚡ ShmPipe Web — live</h3>
       <p>Generates rows in this browser, times a CSV string parse against a binary ArrayBuffer round-trip, and verifies the round-trip matches. Browser version measures CSV vs binary in your browser; the Python Arrow + mmap version is in the repo (shmpipe/) and measured 6.6x at 5M rows.</p>
       <label for="shm-n">Rows <select id="shm-n" style="padding:10px;border-radius:12px;border:2px solid #d6d6e6"><option value="10000">10,000</option><option value="100000" selected>100,000</option></select></label>
@@ -158,18 +154,21 @@ body.dark th,body.dark td{border-color:#33335a}
   </section>
 
   <section id="workflow">
+    <p class="section-kicker">How it works</p>
     <h2>Workflow — how GuardKit works</h2>
     <div class="steps">
-      <div class="step"><b>1️⃣</b><h3>Choose a tool</h3><p>Message or offer here, or a live panel below for code, pipelines, secrets, carbon, or data.</p></div>
-      <div class="step"><b>2️⃣</b><h3>Paste or run</h3><p>Paste the text in your browser, choose files, or run the full <code>python kit.py demo</code> in a terminal. Nothing is uploaded from the web app.</p></div>
-      <div class="step"><b>3️⃣</b><h3>Get a verdict</h3><p>A score out of 100, RED / AMBER / GREEN, with the exact flags found — not just “scam” or “safe”.</p></div>
-      <div class="step"><b>4️⃣</b><h3>Decide, then prove</h3><p>Do not pay or forward on RED. Share the summary, or run the full suite proof and keep the report.</p></div>
+      <div class="step"><span class="step-num">1</span><h3>Choose a tool</h3><p>Message or offer here, or a live panel below for code, pipelines, secrets, carbon, or data.</p></div>
+      <div class="step"><span class="step-num">2</span><h3>Paste or run</h3><p>Paste the text in your browser, choose files, or run the full <code>python kit.py demo</code> in a terminal. Nothing is uploaded from the web app.</p></div>
+      <div class="step"><span class="step-num">3</span><h3>Get a verdict</h3><p>A score out of 100, RED / AMBER / GREEN, with the exact flags found — not just “scam” or “safe”.</p></div>
+      <div class="step"><span class="step-num">4</span><h3>Decide, then prove</h3><p>Do not pay or forward on RED. Share the summary, or run the full suite proof and keep the report.</p></div>
     </div>
   </section>
 
   <section id="proof">
+    <p class="section-kicker">Suite proof</p>
     <h2>Proof, not promises</h2>
-    <table><tr><th>Tool</th><th>Demo result</th></tr>
+    <p class="privacy">Suite proof (Python, run in terminal) — these are the results from running the full Python suite with <code>python kit.py demo</code>, not results from this web page.</p>
+    <table><tr><th>Tool</th><th>Suite result</th></tr>
     <tr><td>SemVer-Diff</td><td>PASS — 4 divergences</td></tr>
     <tr><td>TraceLock</td><td>PASS — no alerts on good pipeline</td></tr>
     <tr><td>WattShift</td><td>PASS — 350g saved</td></tr>
@@ -179,10 +178,12 @@ body.dark th,body.dark td{border-color:#33335a}
     <tr><td>SecretScan</td><td>PASS — leaky flagged, clean passed</td></tr></table>
   </section>
 
-  <h3 id="history-title">Recent checks on this device (local only, never uploaded)</h3>
-  <ul id="history"><li>No checks yet on this device.</li></ul>
-  <p class="privacy" id="privacy">Privacy: client-side only. Not legal advice, not a proof of truth. GuardKit is a worldwide project — verify with your local official authority, embassy, or employer directly. The other GuardKit tools (SemVer-Diff, TraceLock, WattShift, ShmPipe, SecretScan) are developer tools in their own folders — see the main README.</p>
-  <p><a href="landing.html">See the full interactive showcase →</a> &nbsp;|&nbsp; <a href="https://github.com/rafi28-png/guardkit">GuardKit on GitHub →</a></p>
+  <footer class="site-footer">
+    <h3 id="history-title">Recent checks on this device (local only, never uploaded)</h3>
+    <ul id="history"><li>No checks yet on this device.</li></ul>
+    <p class="privacy" id="privacy">Privacy: client-side only. Not legal advice, not a proof of truth. GuardKit is a worldwide project — verify with your local official authority, embassy, or employer directly. The other GuardKit tools (SemVer-Diff, TraceLock, WattShift, ShmPipe, SecretScan) are developer tools in their own folders — see the main README.</p>
+    <p><a href="landing.html">See the full interactive showcase →</a> &nbsp;|&nbsp; <a href="https://github.com/rafi28-png/guardkit">GuardKit on GitHub →</a></p>
+  </footer>
 </main>
 <script src="app.js"></script>
 <script src="tools.js"></script>
